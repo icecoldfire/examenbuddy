@@ -1,0 +1,6 @@
+Hoi {{ user.Naam | trim }}
+
+Je hebt een examenbuddy match! Jouw buddy heet {{ match.Naam | trim }} en kan je bereiken op {{ match['Gsm nummer'] | trim }} via de volgende kanalen: {{ match['Hoe kan jouw buddy je contacteren?'] | trim }}.{% if match.District != "" %} Maar pas op want je buddy komt vanuit het district {{ match.District }}.{% endif %} Hoppelijk is je buddy een ideale match en vergeet geen {{ user['Schaar-steen-papier of blad-steen-schaar?'] | lower }} te spelen!{% if user['Schaar-steen-papier of blad-steen-schaar?'] != match['Schaar-steen-papier of blad-steen-schaar?'] %} Btw je buddy gebruikt foutelijk de naam {{ match['Schaar-steen-papier of blad-steen-schaar?'] | lower }} maar wij weten allemaal dat het {{ user['Schaar-steen-papier of blad-steen-schaar?'] | lower }} moet zijn 😉.{% endif %} {% if match['Waar studeer je?'] != "Middelbaar" %}Jouw buddy studeert aan de {{ match['Waar studeer je?'] | lower }}{% if match['Zit je op kot? Locatie'] != "" %} in {{ match['Waar studeer je? Locatie'] }}{% endif %}{% if match['Zit je op kot?'] != "" %}en zit {% if match['Zit je op kot?'] != "Nee" %}niet {% endif %}op kot{% endif %}.{% endif %}
+
+Groetjes,
+Ploeg zingeving 💡
