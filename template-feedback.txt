@@ -1,0 +1,8 @@
+﻿Hoi {{ user.Naam | title | trim }}
+
+De examens gaan beginnen en er staat dus ook terug een buddy voor je klaar! Je kan inschrijven via volgende url: https://forms.gle/knpSfqEDRXYTMNXDA
+
+Mocht je nog feedback hebben voor ons kan je antwoorden op dit bericht of ons bereiken via Facebook.
+
+Groetjes,
+Ploeg zingeving 💡

@@ -1,0 +1,6 @@
+﻿Hoi {{ user.Naam | title | trim }}
+
+Om jouw inschrijving voor de examenbuddy te vervolledigen vragen we je “MATCH” te antwoorden op dit bericht (+32497751595). Zo zijn we zeker dat jouw nummer correct is. 
+
+Groetjes,
+Ploeg zingeving 💡
