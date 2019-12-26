@@ -258,8 +258,8 @@ def send_match():
     with open(FILE, 'r', encoding="utf-8") as csvFile:
         buddyReader = csv.DictReader(csvFile, delimiter=',', quotechar='"')
         for row in buddyReader:
-            # if(row["Schooltype"] == "Middelbaar"):
-                # continue
+            if(row["Schooltype"] == "Middelbaar"):
+              continue
             newbuddy = Buddy(row)
 
             # Make sure no double phone numbers enter
@@ -284,5 +284,5 @@ def send_match():
         print(match[1].props["Naam"][:20].ljust(22), match[1].props["District"][:14].ljust(16), match[1].props["Schooltype"][:18].ljust(20))
 if __name__ == "__main__":
     #send_feedback()
-    send_confirm()
-    #send_match()
+    #send_confirm()
+    send_match()
