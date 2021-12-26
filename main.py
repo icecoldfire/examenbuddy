@@ -49,7 +49,7 @@ class Buddy:
 
         self.props["Hoekanjouwbuddyjecontacteren"] = sorted(self.props["Hoekanjouwbuddyjecontacteren"].split(";"))
 
-    def findMatch(self):
+    def findMatch(self, disable_same_district):
         candidates = []
 
         for buddy in BUDDIES:
@@ -65,7 +65,7 @@ class Buddy:
                 continue
 
             # Fuzzy matching op district, we willen enkel mensen van andere districten.
-            if fuzz.ratio(self.props["District"], buddy.props["District"]) > 80:
+            if disable_same_district and fuzz.ratio(self.props["District"], buddy.props["District"]) > 80:
                 continue
 
             # Kandidaten worden gesorteerd op aantal overeenkomstige communicatie kanalen
@@ -121,11 +121,12 @@ def matchmaker(iteration=0):
     nomatches = []
 
     matches = []
+    disable_same_district = False
     for buddy in BUDDIES:
         if (buddy.taken is True):
             continue
 
-        match = buddy.findMatch()
+        match = buddy.findMatch(disable_same_district)
 
         if match is not None:
             buddy.buddy = match
@@ -179,6 +180,16 @@ def send_match_message(user, match):
     phone = user.props['Gsmnummer'].strip()
         
     message = template.render(user=user.props, match=match.props)
+
+    f = open('result.csv', 'a', encoding='utf-8')
+    f.write(phone)
+    f.write("\n")
+    f.write(message)
+    
+    f.write("\n")
+    f.write("\n")
+
+    return
     post_fields = {'message': message, "phone": phone}     # Set POST fields here
 
     request = Request(URL, urlencode(post_fields).encode())
@@ -276,9 +287,9 @@ def send_match():
     matches = matchmaker()
     for match in matches:
         send_match_message(match[0], match[1])
-        sleep(60)
+        #sleep(60)
         send_match_message(match[1], match[0])
-        sleep(60)
+        #sleep(60)
         print(match[0].props["Naam"][:20].ljust(22), match[0].props["District"][:14].ljust(16), match[0].props["Schooltype"][:18].ljust(20), end="")
         print(" - ", end="")
         print(match[1].props["Naam"][:20].ljust(22), match[1].props["District"][:14].ljust(16), match[1].props["Schooltype"][:18].ljust(20))
